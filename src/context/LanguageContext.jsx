@@ -55,6 +55,14 @@ export const LanguageProvider = ({ children }) => {
       cloudAndDevOps: "Cloud & DevOps",
       databases: "Databases",
       tools: "Tools & Platforms",
+      operatingSystems: 'Operating Systems',
+      artificialIntelligence: 'AI & Machine Learning',
+      cybersecurity: 'Cybersecurity & Ethical Hacking',
+      vulnerabilityScanningTools: 'Vulnerability Scanning Tools',
+      networkSecurityTools: 'Network Security Tools',
+      securityAutomation: 'Security Automation',
+      dataAnalytics: 'Data Analytics',
+      containerization: 'Containerization'
     },
     fr: {
       // Hero Section
@@ -101,6 +109,14 @@ export const LanguageProvider = ({ children }) => {
       cloudAndDevOps: "Cloud & DevOps",
       databases: "Bases de Données",
       tools: "Outils & Plateformes",
+      operatingSystems: 'Systèmes d\'Exploitation',
+      artificialIntelligence: 'IA et Apprentissage Automatique',
+      cybersecurity: 'Cybersécurité et Hacking Éthique',
+      vulnerabilityScanningTools: 'Outils de Scan de Vulnérabilités',
+      networkSecurityTools: 'Outils de Sécurité Réseau',
+      securityAutomation: 'Automatisation de la Sécurité',
+      dataAnalytics: 'Analyse de Données',
+      containerization: 'Conteneurisation'
     }
   };
 

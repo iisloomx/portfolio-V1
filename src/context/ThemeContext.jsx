@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import { useLanguage } from './LanguageContext';
 
 const ThemeContext = createContext();
 
@@ -24,6 +25,10 @@ const ThemeToggleButton = styled(motion.button)`
   z-index: 1000;
   transition: all 0.3s ease;
 
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -44,8 +49,10 @@ export const ThemeProvider = ({ children }) => {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark-theme');
+      root.classList.remove('light-theme');
     } else {
       root.classList.remove('dark-theme');
+      root.classList.add('light-theme');
     }
     localStorage.setItem('theme', theme);
   }, [theme]);
@@ -57,6 +64,7 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
+      <ThemeToggle />
     </ThemeContext.Provider>
   );
 };

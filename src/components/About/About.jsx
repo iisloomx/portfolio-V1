@@ -1,6 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import { FaJava, FaPython, FaReact, FaNodeJs, FaDocker, FaLinux, FaGitAlt, FaDatabase, FaCloud, FaCode, FaTerminal, FaPhp, FaCss3, FaWindows, FaUbuntu, FaBrain, FaShieldAlt, FaNetworkWired, FaSearchLocation, FaChartBar, FaChartLine, FaServer } from 'react-icons/fa';
+import { SiTypescript, SiJavascript, SiMysql, SiMongodb, SiOracle, SiRedis, SiOwncloud } from 'react-icons/si';
+import { DiDjango } from 'react-icons/di';
 import { useLanguage } from '../../context/LanguageContext';
 
 // 1) Import the library + default CSS
@@ -14,11 +17,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import {
-  FaJava, FaPython, FaReact, FaNodeJs,
-  FaDocker, FaLinux, FaCloud
-} from 'react-icons/fa';
-import { SiKubernetes, SiPostgresql, SiMongodb, SiGit } from 'react-icons/si';
-import { FiCode, FiServer, FiBook } from 'react-icons/fi';
+  FiCode, FiBook
+} from 'react-icons/fi';
 
 /* ============================
    Styled Components
@@ -266,44 +266,30 @@ const TimelineCard = styled.div`
   }
 `;
 
+const CategoryTitle = styled.h3`
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+`;
+
+const CategoryDescription = styled.p`
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+`;
+
 /* ============================
    Data Arrays
 ============================= */
-
-const skillCategories = [
-  {
-    title: 'Programming',
-    description: 'Core Languages',
-    skills: [
-      { icon: <FaJava />, name: 'Java' },
-      { icon: <FaPython />, name: 'Python' }
-    ]
-  },
-  {
-    title: 'Web Dev',
-    description: 'Frontend & Backend',
-    skills: [
-      { icon: <FaReact />, name: 'React' },
-      { icon: <FaNodeJs />, name: 'Node.js' }
-    ]
-  },
-  {
-    title: 'DevOps',
-    description: 'Cloud & Infrastructure',
-    skills: [
-      { icon: <FaDocker />, name: 'Docker' },
-      { icon: <FaLinux />, name: 'Linux' }
-    ]
-  },
-  {
-    title: 'Databases',
-    description: 'Data Management',
-    skills: [
-      { icon: <SiPostgresql />, name: 'PostgreSQL' },
-      { icon: <SiMongodb />, name: 'MongoDB' }
-    ]
-  }
-];
 
 const timelineItems = [
   {
@@ -321,7 +307,7 @@ const timelineItems = [
     description: `Gained a solid foundation in computer science principles, 
                   learned French language (B2), etc.`,
     date: '2021 - 2023',
-    icon: <FiServer />,
+    icon: <FiBook />,
     position: 'right'
   },
   {
@@ -343,37 +329,113 @@ const About = () => {
   const { language, translations } = useLanguage();
   const t = translations[language];
 
-  const skillCategoriesTranslated = [
+  const skillCategories = [
     {
-      title: 'Programming',
+      title: t.programmingLanguages,
       description: 'Core Languages',
       skills: [
         { icon: <FaJava />, name: 'Java' },
-        { icon: <FaPython />, name: 'Python' }
+        { icon: <FaPython />, name: 'Python' },
+        { icon: <FaCode />, name: 'C' },
+        { icon: <FaTerminal />, name: 'Ada' }
       ]
     },
     {
-      title: 'Web Dev',
+      title: t.webTechnologies,
       description: 'Frontend & Backend',
       skills: [
         { icon: <FaReact />, name: 'React' },
-        { icon: <FaNodeJs />, name: 'Node.js' }
+        { icon: <FaNodeJs />, name: 'Node.js' },
+        { icon: <SiTypescript />, name: 'TypeScript' },
+        { icon: <SiJavascript />, name: 'JavaScript' },
+        { icon: <FaPhp />, name: 'PHP' },
+        { icon: <FaCss3 />, name: 'CSS' }
       ]
     },
     {
-      title: 'DevOps',
-      description: 'Cloud & Infrastructure',
+      title: t.cloudAndDevOps,
+      description: 'Infrastructure & Deployment',
       skills: [
         { icon: <FaDocker />, name: 'Docker' },
-        { icon: <FaLinux />, name: 'Linux' }
+        { icon: <SiOwncloud />, name: 'OwnCloud' }
       ]
     },
     {
-      title: 'Databases',
+      title: t.operatingSystems,
+      description: 'System Management',
+      skills: [
+        { icon: <FaLinux />, name: 'Linux' },
+        { icon: <FaUbuntu />, name: 'Debian' },
+        { icon: <FaTerminal />, name: 'Kali Linux' },
+        { icon: <FaWindows />, name: 'Windows' }
+      ]
+    },
+    {
+      title: t.artificialIntelligence,
+      description: 'AI & Machine Learning',
+      skills: [
+        { icon: <FaBrain />, name: 'Ollama' }
+      ]
+    },
+    {
+      title: t.vulnerabilityScanningTools,
+      description: 'Security Assessment',
+      skills: [
+        { icon: <FaShieldAlt />, name: 'Burp Suite' },
+        { icon: <FaDatabase />, name: 'SQLmap' }
+      ]
+    },
+    {
+      title: t.networkSecurityTools,
+      description: 'Network Penetration',
+      skills: [
+        { icon: <FaNetworkWired />, name: 'Wireshark' },
+        { icon: <FaSearchLocation />, name: 'Nmap' },
+        { icon: <FaCode />, name: 'Nikto' }
+      ]
+    },
+    {
+      title: t.securityAutomation,
+      description: 'Scripting & Automation',
+      skills: [
+        { icon: <FaTerminal />, name: 'Bash Scripting' },
+        { icon: <FaPython />, name: 'Python Security' }
+      ]
+    },
+    {
+      title: t.dataAnalytics,
+      description: 'Data Insights & Visualization',
+      skills: [
+        { icon: <FaChartBar />, name: 'Pandas' },
+        { icon: <FaChartLine />, name: 'Matplotlib' }
+      ]
+    },
+    {
+      title: t.containerization,
+      description: 'Virtualization & Containerization',
+      skills: [
+        { icon: <FaDocker />, name: 'Docker Compose' },
+        { icon: <FaServer />, name: 'Kubernetes' }
+      ]
+    },
+    {
+      title: t.databases,
       description: 'Data Management',
       skills: [
-        { icon: <SiPostgresql />, name: 'PostgreSQL' },
-        { icon: <SiMongodb />, name: 'MongoDB' }
+        { icon: <FaDatabase />, name: 'Database' },
+        { icon: <SiMysql />, name: 'MySQL' },
+        { icon: <SiMongodb />, name: 'MongoDB' },
+        { icon: <SiOracle />, name: 'Oracle' },
+        { icon: <SiRedis />, name: 'Redis' }
+      ]
+    },
+    {
+      title: t.tools,
+      description: 'Development Tools',
+      skills: [
+        { icon: <FaGitAlt />, name: 'Git' },
+        { icon: <FaTerminal />, name: 'CLI' },
+        { icon: <FiCode />, name: 'VS Code' }
       ]
     }
   ];
@@ -419,11 +481,6 @@ const About = () => {
                 background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                
-                '@media (max-width: 768px)': {
-                  fontSize: '2rem',
-                  marginBottom: '1.5rem'
-                }
               }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -433,7 +490,7 @@ const About = () => {
             </motion.h2>
 
             <SkillsGrid>
-              {skillCategoriesTranslated.map((category, catIndex) => (
+              {skillCategories.map((category, catIndex) => (
                 <SkillCard
                   key={catIndex}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -446,29 +503,12 @@ const About = () => {
                   }}
                   viewport={{ once: true }}
                 >
-                  <h3 style={{ 
-                    marginBottom: '0.5rem', 
-                    color: 'var(--text)', 
-                    fontSize: '1.2rem',
-                    fontWeight: 600,
-                    
-                    '@media (max-width: 768px)': {
-                      fontSize: '1rem'
-                    }
-                  }}>
+                  <CategoryTitle>
                     {category.title}
-                  </h3>
-                  <p style={{ 
-                    color: 'var(--text-secondary)', 
-                    fontSize: '0.9rem',
-                    marginBottom: '1rem',
-                    
-                    '@media (max-width: 768px)': {
-                      fontSize: '0.8rem'
-                    }
-                  }}>
+                  </CategoryTitle>
+                  <CategoryDescription>
                     {category.description}
-                  </p>
+                  </CategoryDescription>
                   <SkillIconContainer>
                     {category.skills.map((skill, skillIndex) => (
                       <SkillIconWrapper
