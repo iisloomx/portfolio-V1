@@ -1,4 +1,4 @@
-import { ThemeProvider, useTheme, ThemeToggle } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Header from './components/Header/Header';
@@ -51,26 +51,20 @@ const MobileControlButton = styled(motion.button)`
 `;
 
 const MobileControls = () => {
-  const { language, toggleLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
 
   return (
     <MobileControlsContainer
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.5 }}
     >
       <MobileControlButton
         onClick={toggleLanguage}
         whileTap={{ scale: 0.9 }}
       >
         {language === 'en' ? 'FR' : 'EN'}
-      </MobileControlButton>
-      <MobileControlButton
-        onClick={toggleTheme}
-        whileTap={{ scale: 0.9 }}
-      >
-        {theme === 'light' ? '🌙' : '☀️'}
       </MobileControlButton>
     </MobileControlsContainer>
   );
@@ -89,7 +83,6 @@ function App() {
           <Contact />
         </main>
         <Footer />
-        <ThemeToggle />
         <MobileControls />
       </ThemeProvider>
     </LanguageProvider>

@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useLanguage } from './LanguageContext';
 
@@ -64,26 +64,7 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
-      <ThemeToggle />
     </ThemeContext.Provider>
-  );
-};
-
-export const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    <AnimatePresence mode="wait">
-      <ThemeToggleButton
-        onClick={toggleTheme}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileTap={{ scale: 0.9 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 17 }}
-      >
-        {theme === 'light' ? <FiMoon /> : <FiSun />}
-      </ThemeToggleButton>
-    </AnimatePresence>
   );
 };
 

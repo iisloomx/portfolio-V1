@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiSun, FiMoon, FiGlobe } from 'react-icons/fi';
+import { FiMenu, FiX, FiGlobe, FiMoon, FiSun, FiSun as FiLight, FiMoon as FiDark } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -88,6 +88,20 @@ const NavLink = styled.a`
   }
 `;
 
+const LanguageToggleButton = styled(motion.button)`
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 1rem;
+  
+  &:hover {
+    color: var(--primary);
+  }
+`;
+
 const ThemeToggleButton = styled(motion.button)`
   width: 40px;
   height: 40px;
@@ -142,20 +156,6 @@ const ThemeToggleButton = styled(motion.button)`
   .moon-icon {
     transform: ${props => props.theme === 'light' ? 'translate(-50%, -50%)' : 'translate(-50%, 50%)'};
     opacity: ${props => props.theme === 'light' ? 1 : 0};
-  }
-`;
-
-const LanguageToggleButton = styled(motion.button)`
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  margin-left: 1rem;
-  
-  &:hover {
-    color: var(--primary);
   }
 `;
 
@@ -340,33 +340,11 @@ const Header = () => {
             ))}
             <ThemeToggleButton
               onClick={toggleTheme}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
               theme={theme}
             >
               <div className="icon-container">
-                <motion.div
-                  className="sun-icon"
-                  initial={false}
-                  animate={{ 
-                    y: theme === 'dark' ? 0 : -30,
-                    opacity: theme === 'dark' ? 1 : 0
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <FiSun />
-                </motion.div>
-                <motion.div
-                  className="moon-icon"
-                  initial={false}
-                  animate={{ 
-                    y: theme === 'light' ? 0 : 30,
-                    opacity: theme === 'light' ? 1 : 0
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <FiMoon />
-                </motion.div>
+                <FiSun className="sun-icon" />
+                <FiMoon className="moon-icon" />
               </div>
             </ThemeToggleButton>
             <LanguageToggleButton
