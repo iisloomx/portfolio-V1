@@ -24,10 +24,19 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Fix extra space issues at the bottom */
+body > * {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -52,6 +61,31 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Fix potential extra space or unwanted elements */
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  background: none !important;
+}
+
+.vertical-timeline::before {
+  background: #6C63FF !important;
+  width: 4px !important;
+  display: block !important;
+}
+
+
+/* Ensure no unexpected footer overflow */
+footer {
+  width: 100%;
+  margin: 0;
+  padding: 2rem 0;
+  position: relative;
+  bottom: 0;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: light) {

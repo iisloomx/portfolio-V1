@@ -1,4 +1,5 @@
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
@@ -10,15 +11,17 @@ import Footer from './components/Footer/Footer';
 function App() {
   return (
     <ThemeProvider>
-      <GlobalStyles />
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
+      <LanguageProvider>
+        <GlobalStyles />
+        <Header />
+        <main>
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+        </main>
+        <Footer />
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

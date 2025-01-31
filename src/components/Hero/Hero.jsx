@@ -4,13 +4,14 @@ import { FiArrowRight, FiDownload } from 'react-icons/fi';
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { useCallback } from "react";
+import { useLanguage } from '../../context/LanguageContext';
 
 const HeroSection = styled.section`
   min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   overflow: hidden;
 `;
 
@@ -21,7 +22,7 @@ const Container = styled.div`
   z-index: 1;
 `;
 
-const Content = styled.div`
+const Content = styled(motion.div)`
   max-width: 800px;
 `;
 
@@ -128,145 +129,102 @@ const ParticlesContainer = styled.div`
   z-index: 0;
 `;
 
-const Hero = () => {
-  const particlesInit = useCallback(async engine => {
+function Hero() {
+  const { language, translations } = useLanguage();
+  
+  const t = translations[language];
+
+  const particlesInit = useCallback(async (engine) => {
     await loadSlim(engine);
   }, []);
 
-  const particlesConfig = {
-    particles: {
-      number: {
-        value: 50,
-        density: {
-          enable: true,
-          value_area: 800
-        }
-      },
-      color: {
-        value: "#38bdf8"
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 0.5,
-        random: true
-      },
-      size: {
-        value: 3,
-        random: true
-      },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#38bdf8",
-        opacity: 0.2,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        random: true,
-        straight: false,
-        out_mode: "out",
-        bounce: false
+  const particlesLoaded = useCallback(async (container) => {
+    console.log(container);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
       }
-    },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: {
-          enable: true,
-          mode: "grab"
-        },
-        onclick: {
-          enable: true,
-          mode: "push"
-        },
-        resize: true
-      },
-      modes: {
-        grab: {
-          distance: 140,
-          line_linked: {
-            opacity: 0.5
-          }
-        },
-        push: {
-          particles_nb: 4
-        }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 100 
       }
-    },
-    retina_detect: true
+    }
   };
 
   return (
     <HeroSection id="home">
-      <ParticlesContainer>
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          options={particlesConfig}
-        />
-      </ParticlesContainer>
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        options={{
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "var(--accent)" },
+            opacity: { value: 0.5, random: false },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: "var(--accent)", opacity: 0.4 },
+            move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out" }
+          }
+        }}
+      />
       <Container>
-        <Content>
-          <Greeting
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Hello, I'm
+        <Content 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <Greeting variants={itemVariants}>
+            {t.greeting}
           </Greeting>
-          <Name
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <Name variants={itemVariants}>
             Salim Al-Naaimi
           </Name>
-          <Title
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            Computer Science Student & System Administrator
+          <Title variants={itemVariants}>
+            {t.title}
           </Title>
-          <Description
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            Specializing in Déploiement d'Applications Communicantes et Sécurisées (DACS).
-            Passionate about system administration, network security, and creating efficient solutions.
+          <Description variants={itemVariants}>
+            {t.description}
           </Description>
-          <ButtonContainer
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+          <ButtonContainer 
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <Button
-              href="#contact"
+            <Button 
+              href="#contact" 
               className="primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variants={itemVariants}
             >
-              Get in Touch <FiArrowRight />
+              {t.contactButton} <FiArrowRight />
             </Button>
-            <Button
-              href="/resume.pdf"
+            <Button 
+              href="/CV.pdf" 
+              download 
               className="secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variants={itemVariants}
             >
-              Download CV <FiDownload />
+              {t.resumeButton} <FiDownload />
             </Button>
           </ButtonContainer>
         </Content>
       </Container>
     </HeroSection>
   );
-};
+}
 
 export default Hero;
