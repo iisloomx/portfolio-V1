@@ -1,4 +1,4 @@
-# Salim Al-Naaimi Portfolio
+# Salim Al-Naaimi Portfolio ------- this is only the first version of the site maybe ill make it better l8r on.
 
 A modern, responsive portfolio website built with React and Vite, featuring a clean design and smooth animations.
 
