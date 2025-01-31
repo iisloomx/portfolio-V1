@@ -9,6 +9,7 @@ import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
 const MobileControlsContainer = styled(motion.div)`
   position: fixed;
@@ -65,6 +66,12 @@ const MobileControls = () => {
         whileTap={{ scale: 0.9 }}
       >
         {language === 'en' ? 'FR' : 'EN'}
+      </MobileControlButton>
+      <MobileControlButton
+        onClick={toggleTheme}
+        whileTap={{ scale: 0.9 }}
+      >
+        {theme === 'light' ? <FiMoon /> : <FiSun />}
       </MobileControlButton>
     </MobileControlsContainer>
   );
