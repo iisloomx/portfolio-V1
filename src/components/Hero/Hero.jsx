@@ -213,7 +213,7 @@ function Hero() {
               {t.contactButton} <FiArrowRight />
             </Button>
             <Button 
-              href="/CV.pdf" 
+              href="../CV.pdf" 
               download 
               className="secondary"
               variants={itemVariants}
