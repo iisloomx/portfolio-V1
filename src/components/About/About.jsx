@@ -302,13 +302,21 @@ const timelineItems = [
     position: 'left'
   },
   {
+    title: 'Internship - R&D Trainee',
+    subtitle: 'Insimo',
+    description: `Worked in system administration (Linux), implemented a centralized logging system for Docker containers, Linux, and Windows logs; added SSH, port verification, and updates; worked with Grafana and InfluxDB for monitoring and visualization.`,
+    date: '2024',
+    icon: <FaLinux />,
+    position: 'right'
+  },
+  {
     title: 'Pre-University Studies',
     subtitle: 'University of Limoges',
     description: `Gained a solid foundation in computer science principles, 
                   learned French language (B2), etc.`,
     date: '2021 - 2023',
     icon: <FiBook />,
-    position: 'right'
+    position: 'left'
   },
   {
     title: 'General Studies',
@@ -317,7 +325,7 @@ const timelineItems = [
                   chemistry, and biology.`,
     date: '2019 - 2021',
     icon: <FiBook />,
-    position: 'left'
+    position: 'right'
   }
 ];
 

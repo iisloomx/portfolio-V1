@@ -62,13 +62,41 @@ export const LanguageProvider = ({ children }) => {
       networkSecurityTools: 'Network Security Tools',
       securityAutomation: 'Security Automation',
       dataAnalytics: 'Data Analytics',
-      containerization: 'Containerization'
+      containerization: 'Containerization',
+
+      // Timeline/Experience Section
+      timeline: [
+        {
+          title: "Computer Science Student",
+          subtitle: "IUT Informatique, Paul Sabatier III",
+          description: "Specializing in Deploying Secure and Communicative Applications (DACS)",
+          date: "2025 - Present"
+        },
+        {
+          title: "Internship - R&D Trainee",
+          subtitle: "Insimo",
+          description: "Worked in system administration (Linux), implemented a centralized logging system for Docker containers, Linux, and Windows logs; added SSH, port verification, and updates; worked with Grafana and InfluxDB for monitoring and visualization.",
+          date: "2024"
+        },
+        {
+          title: "Pre-University Studies",
+          subtitle: "University of Limoges",
+          description: "Gained a solid foundation in computer science principles, learned French language (B2), etc.",
+          date: "2021 - 2023"
+        },
+        {
+          title: "General Studies",
+          subtitle: "Azan Bin Qais High School",
+          description: "Gained a solid foundation in math, physics, chemistry, and biology.",
+          date: "2019 - 2021"
+        }
+      ],
     },
     fr: {
       // Hero Section
       greeting: "BONJOUR, JE SUIS",
       title: "Étudiant en Informatique | Futur Administrateur Systèmes & Réseaux",
-      description: "Actuellement étudiant en informatique à l'IUT Paul Sabatier III, je me spécialise dans le Déploiement d'Applications Communicantes et Sécurisées (DACS). Passionné par l'administration des systèmes, la sécurité des réseaux et le développement logiciel, je possède une solide expérience en gestion des environnements Linux, administration de bases de données (PL/SQL, Oracle) et développement full-stack (Java, Python, PHP et technologies web).\n\nAu cours de mon parcours académique, j'ai configuré et géré des serveurs de stockage, développé des applications basées sur des bases de données évolutives et conçu des architectures logicielles en UML. J'aime relever des défis techniques complexes, optimiser les systèmes pour plus de performance et de sécurité, et apprendre continuellement de nouvelles technologies.\n\nEn dehors de l'informatique, je suis passionné par le powerlifting, la photographie et les voyages, toujours à la recherche de nouveaux défis, que ce soit dans le monde numérique ou ailleurs.",
+      description: "Actuellement étudiant en informatique à l'IUT Paul Sabatier III, je me spécialise dans le Déploiement d'Applications Communicantes et Sécurisées (DACS). Passionné par l'administration des systèmes, la sécurité des réseaux et le développement logiciel, je possède une solide expérience en gestion des environnements Linux, administration de bases de données (PL/SQL, Oracle), et développement full-stack (Java, Python, PHP et technologies web).\n\nAu cours de mon parcours académique, j'ai configuré et géré des serveurs de stockage, développé des applications basées sur des bases de données évolutives et conçu des architectures logicielles en UML. J'aime relever des défis techniques complexes, optimiser les systèmes pour plus de performance et de sécurité, et apprendre continuellement de nouvelles technologies.\n\nEn dehors de l'informatique, je suis passionné par le powerlifting, la photographie et les voyages, toujours à la recherche de nouveaux défis, que ce soit dans le monde numérique ou ailleurs.",
       contactButton: "Me Contacter",
       resumeButton: "Télécharger CV",
 
@@ -116,7 +144,35 @@ export const LanguageProvider = ({ children }) => {
       networkSecurityTools: 'Outils de Sécurité Réseau',
       securityAutomation: 'Automatisation de la Sécurité',
       dataAnalytics: 'Analyse de Données',
-      containerization: 'Conteneurisation'
+      containerization: 'Conteneurisation',
+
+      // Timeline/Experience Section
+      timeline: [
+        {
+          title: "Étudiant en Informatique",
+          subtitle: "IUT Informatique, Paul Sabatier III",
+          description: "Spécialisation en Déploiement d'Applications Communicantes et Sécurisées (DACS)",
+          date: "2025 - Présent"
+        },
+        {
+          title: "Stage - Stagiaire R&D",
+          subtitle: "Insimo",
+          description: "Administration système Linux, mise en place d'un système centralisé pour les logs des conteneurs Docker, logs Linux et Windows ; ajout d'accès SSH, vérification des ports et des mises à jour ; travail avec Grafana et InfluxDB pour la supervision et la visualisation.",
+          date: "2024"
+        },
+        {
+          title: "Études Pré-Universitaires",
+          subtitle: "Université de Limoges",
+          description: "Acquisition d'une solide base en informatique, apprentissage du français (B2), etc.",
+          date: "2021 - 2023"
+        },
+        {
+          title: "Études Générales",
+          subtitle: "Azan Bin Qais High School",
+          description: "Bases solides en mathématiques, physique, chimie et biologie.",
+          date: "2019 - 2021"
+        }
+      ],
     }
   };
 
