@@ -1,20 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiGithub, 
-  FiExternalLink, 
-  FiX,
-  FiServer,
-  FiDatabase,
-  FiShield,
-  FiCode,
-  FiGrid,
-  FiCloud,
-  FiBox,
-  FiCpu,
-  FiLock
-} from 'react-icons/fi';
+import { FiGithub, FiExternalLink, FiX, FiServer, FiDatabase, FiShield, FiCode, FiGrid, FiCloud, FiBox, FiCpu, FiLock } from 'react-icons/fi';
+import { FaDocker, FaNetworkWired, FaCameraRetro } from 'react-icons/fa';
+import { SiGrafana, SiElasticsearch, SiCheckmarx, SiLinux, SiSecurityscorecard } from 'react-icons/si';
 import Modal from 'react-modal';
 import { Tilt } from 'react-tilt';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,6 +11,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useLanguage } from '../../context/LanguageContext';
 
 Modal.setAppElement('#root');
 
@@ -46,22 +36,29 @@ const Title = styled(motion.h2)`
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
-
-  @media (max-width: 400px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2.3rem;
+  padding: 2.5rem 0;
 `;
 
 const ProjectCard = styled(motion.div)`
   background: var(--card-bg);
-  border-radius: 15px;
+  border-radius: 1.6rem;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(var(--primary-rgb), 0.10), 0 2px 16px rgba(124,58,237,0.08);
+  border: 2px solid var(--glass-border);
+  transition: box-shadow 0.3s, border 0.3s, transform 0.25s, background 0.25s;
+  cursor: default;
+  position: relative;
   height: 100%;
+  backdrop-filter: blur(12px);
+  color: var(--text);
+  &:hover {
+    box-shadow: 0 16px 48px 0 rgba(var(--primary-rgb),0.19), 0 8px 32px 0 rgba(124,58,237,0.13);
+    border: 2px solid var(--primary);
+    transform: translateY(-6px) scale(1.025);
+    background: linear-gradient(120deg, var(--card-bg) 80%, var(--primary) 100%);
+  }
 `;
 
 const ProjectContent = styled.div`
@@ -72,212 +69,62 @@ const ProjectContent = styled.div`
 `;
 
 const ProjectIcon = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.7rem;
+  margin-bottom: 1.4rem;
   color: var(--primary);
   display: flex;
   justify-content: center;
+  filter: none;
+  transition: color 0.3s, filter 0.3s;
   
-  svg {
-    filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.3));
+  /* Light mode: no glow, Dark mode: soft glow */
+  html.dark-theme & {
+    filter: drop-shadow(0 0 12px #a259f7cc);
+    color: #a259f7;
+  }
+  html.light-theme & {
+    filter: none;
+    color: #7c3aed;
   }
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.9rem;
   color: var(--text);
+  font-weight: 700;
 `;
 
 const ProjectDescription = styled.p`
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.7;
   color: var(--text);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.7rem;
   flex-grow: 1;
 `;
 
-const TechStack = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-`;
-
-const Tech = styled.span`
-  font-size: 0.9rem;
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  background: var(--primary);
-  color: white;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const Links = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const LinkIcon = styled.a`
-  color: var(--text);
-  font-size: 1.2rem;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--primary);
-  }
-`;
-
-const modalStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    zIndex: 1000,
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '800px',
-    width: '90%',
-    padding: '2rem',
-    border: 'none',
-    borderRadius: '15px',
-    backgroundColor: 'var(--card-bg)',
-    color: 'var(--text)',
-  },
+const iconMap = {
+  docker: <FaDocker />,
+  metrics: <SiCheckmarx />,
+  grafana: <SiGrafana />,
+  network: <FaNetworkWired />,
+  security: <SiSecurityscorecard />,
+  camera: <FaCameraRetro />,
+  server: <FiServer />,
+  database: <FiDatabase />,
+  shield: <FiShield />,
+  code: <FiCode />,
+  grid: <FiGrid />,
+  cloud: <FiCloud />,
+  box: <FiBox />,
+  cpu: <FiCpu />,
+  lock: <FiLock />,
 };
 
-const ModalContent = styled.div`
-  position: relative;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: -1rem;
-  right: -1rem;
-  background: var(--primary);
-  color: white;
-  border: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-
-  &:hover {
-    background: var(--hover);
-  }
-`;
-
-const ModalTitle = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: var(--text);
-`;
-
-const ImageSlider = styled.div`
-  margin: 2rem 0;
-  border-radius: 10px;
-  overflow: hidden;
-
-  .swiper {
-    width: 100%;
-    height: 300px;
-  }
-
-  .swiper-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const projects = [
-  {
-    title: 'Storage Server Setup',
-    description: 'Implemented and configured a secure storage server using Linux, Apache, and OwnCloud, focusing on data security and efficient file management.',
-    tech: ['Linux', 'Apache', 'OwnCloud'],
-    github: '#',
-    icon: <FiServer />,
-    images: [
-      'https://via.placeholder.com/800x400?text=Server+Dashboard',
-      'https://via.placeholder.com/800x400?text=File+Management',
-    ],
-    longDescription: 'A comprehensive storage server solution that provides secure file storage and sharing capabilities. Features include user authentication, file versioning, and automated backups.',
-  },
-  {
-    title: 'Cheese Sales App',
-    description: 'Developed a Java-based application for managing cheese sales, implementing UML design principles and creating an intuitive user interface.',
-    tech: ['Java', 'UML', 'UI/UX'],
-    github: '#',
-    icon: <FiBox />,
-    images: [
-      'https://via.placeholder.com/800x400?text=Sales+Dashboard',
-      'https://via.placeholder.com/800x400?text=Inventory+Management',
-    ],
-    longDescription: 'A sophisticated point-of-sale system specifically designed for cheese retailers. The application handles inventory management, sales tracking, and customer relationships.',
-  },
-  {
-    title: 'Oracle APEX Web App',
-    description: 'Created a web application using Oracle APEX, implementing database management and user authentication features.',
-    tech: ['Oracle APEX', 'SQL', 'Web Development'],
-    github: '#',
-    icon: <FiDatabase />,
-    images: [
-      'https://via.placeholder.com/800x400?text=Web+Interface',
-      'https://via.placeholder.com/800x400?text=Database+Schema',
-    ],
-    longDescription: 'A robust web application built on Oracle APEX platform, featuring complex database operations and a user-friendly interface.',
-  },
-  {
-    title: 'Linux Virtualized Environment',
-    description: 'Set up and managed a virtualized Linux environment using VirtualBox, implementing system administration best practices.',
-    tech: ['Linux', 'VirtualBox', 'System Admin'],
-    github: '#',
-    icon: <FiCpu />,
-    images: [
-      'https://via.placeholder.com/800x400?text=Virtual+Environment',
-      'https://via.placeholder.com/800x400?text=System+Architecture',
-    ],
-    longDescription: 'A comprehensive virtualized environment setup that demonstrates advanced system administration capabilities and network configuration.',
-  },
-  {
-    title: 'Anomaly Detection App',
-    description: 'Built an AI-powered system for detecting anomalies in data streams, implementing machine learning algorithms for real-time analysis.',
-    tech: ['Python', 'Machine Learning', 'Data Analysis'],
-    github: '#',
-    icon: <FiGrid />,
-    images: [
-      'https://via.placeholder.com/800x400?text=ML+Dashboard',
-      'https://via.placeholder.com/800x400?text=Analysis+Results',
-    ],
-    longDescription: 'An intelligent system that uses machine learning to detect and flag anomalies in real-time data streams, with visualization and reporting capabilities.',
-  },
-  {
-    title: 'Advanced Proxy',
-    description: 'Developed a sophisticated proxy application with enhanced security features and traffic management capabilities.',
-    tech: ['Networking', 'Security', 'C'],
-    github: '#',
-    icon: <FiLock />,
-    images: [
-      'https://via.placeholder.com/800x400?text=Proxy+Interface',
-      'https://via.placeholder.com/800x400?text=Traffic+Analysis',
-    ],
-    longDescription: 'A high-performance proxy application that provides advanced security features, traffic management, and detailed analytics.',
-  }
-];
-
 const Projects = () => {
+  const { translations, language } = useLanguage();
+  const t = translations[language];
+  const projects = t.projects;
   const [selectedProject, setSelectedProject] = useState(null);
 
   const openModal = (project) => {
@@ -288,6 +135,75 @@ const Projects = () => {
     setSelectedProject(null);
   };
 
+  const modalStyles = {
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+      zIndex: 1000,
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      maxWidth: '800px',
+      width: '90%',
+      padding: '2rem',
+      border: 'none',
+      borderRadius: '15px',
+      backgroundColor: 'var(--card-bg)',
+      color: 'var(--text)',
+    },
+  };
+
+  const ModalContent = styled.div`
+    position: relative;
+  `;
+
+  const CloseButton = styled.button`
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: var(--hover);
+    }
+  `;
+
+  const ModalTitle = styled.h2`
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  `;
+
+  const ImageSlider = styled.div`
+    margin: 2rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .swiper {
+      width: 100%;
+      height: 300px;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  `;
+
   return (
     <ProjectsSection id="projects">
       <Container>
@@ -297,12 +213,12 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          My Projects
+          {t.projectsTitle}
         </Title>
         <ProjectGrid>
-          {projects.map((project, index) => (
+          {projects.map((project, idx) => (
             <Tilt
-              key={index}
+              key={idx}
               options={{
                 max: 15,
                 scale: 1.05,
@@ -310,34 +226,17 @@ const Projects = () => {
               }}
             >
               <ProjectCard
-                onClick={() => openModal(project)}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: idx * 0.13 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
+                style={{ cursor: 'default' }}
               >
                 <ProjectContent>
-                  <ProjectIcon>{project.icon}</ProjectIcon>
+                  <ProjectIcon>{iconMap[project.icon] || <FaDocker />}</ProjectIcon>
                   <ProjectTitle>{project.title}</ProjectTitle>
                   <ProjectDescription>{project.description}</ProjectDescription>
-                  <TechStack>
-                    {project.tech.map((tech, techIndex) => (
-                      <Tech key={techIndex}>{tech}</Tech>
-                    ))}
-                  </TechStack>
-                  <Links>
-                    {project.github && (
-                      <LinkIcon href={project.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-                        <FiGithub />
-                      </LinkIcon>
-                    )}
-                    {project.demo && (
-                      <LinkIcon href={project.demo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-                        <FiExternalLink />
-                      </LinkIcon>
-                    )}
-                  </Links>
                 </ProjectContent>
               </ProjectCard>
             </Tilt>
@@ -356,7 +255,7 @@ const Projects = () => {
                 <CloseButton onClick={closeModal}>
                   <FiX />
                 </CloseButton>
-                <ProjectIcon>{selectedProject.icon}</ProjectIcon>
+                <ProjectIcon>{iconMap[selectedProject.icon] || <FaDocker />}</ProjectIcon>
                 <ModalTitle>{selectedProject.title}</ModalTitle>
                 <ImageSlider>
                   <Swiper
@@ -375,11 +274,6 @@ const Projects = () => {
                   </Swiper>
                 </ImageSlider>
                 <ProjectDescription>{selectedProject.longDescription}</ProjectDescription>
-                <TechStack>
-                  {selectedProject.tech.map((tech, index) => (
-                    <Tech key={index}>{tech}</Tech>
-                  ))}
-                </TechStack>
               </ModalContent>
             )}
           </AnimatePresence>

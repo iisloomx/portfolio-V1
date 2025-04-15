@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiGlobe, FiMoon, FiSun, FiSun as FiLight, FiMoon as FiDark } from 'react-icons/fi';
+import { FiMenu, FiX, FiGlobe, FiMoon, FiSun, FiSun as FiLight, FiMoon as FiDark, FiTool } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 const HeaderContainer = styled(motion.header)`
   position: fixed;
@@ -255,43 +256,25 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, translations } = useLanguage();
+  const location = useLocation();
 
   const navLinks = [
-    { label: language === 'en' ? translations.en.navHome : translations.fr.navHome, href: '#home' },
-    { label: language === 'en' ? translations.en.navAbout : translations.fr.navAbout, href: '#about' },
-    { label: language === 'en' ? translations.en.navProjects : translations.fr.navProjects, href: '#projects' },
-    { label: language === 'en' ? translations.en.navContact : translations.fr.navContact, href: '#contact' }
+    { label: language === 'en' ? translations.en.navHome : translations.fr.navHome, to: '/', isRoute: true },
+    { label: language === 'en' ? translations.en.navAbout : translations.fr.navAbout, to: '/about', isRoute: true },
+    { label: language === 'en' ? translations.en.navProjects : translations.fr.navProjects, to: '/projects', isRoute: true },
+    { label: (
+        <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.02em', display: 'flex', alignItems: 'center' }}>
+          <FiTool style={{ color: 'var(--primary)', marginRight: '0.32em', filter: 'drop-shadow(0 0 6px #a259f7cc)' }} />
+          My Toolbox
+        </span>
+      ), to: '/toolbox', isRoute: true }
   ];
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-      setActiveSection(sectionId);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      const sections = ['home', 'about', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -316,27 +299,26 @@ const Header = () => {
         <Nav>
           <Logo 
             href="#home" 
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('home');
-            }}
           >
             Salim
           </Logo>
           
           <NavLinks>
             {navLinks.map((link, index) => (
-              <NavLink 
-                key={index} 
-                href={link.href}
-                className={activeSection === link.href.substring(1) ? 'active' : ''}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href.substring(1));
-                }}
-              >
-                {link.label}
-              </NavLink>
+                <RouterLink
+                  key={index}
+                  to={link.to}
+                  style={{
+                    textDecoration: 'none',
+                    marginLeft: '1rem',
+                    color: location.pathname === link.to ? 'var(--primary)' : 'var(--text)',
+                    fontWeight: location.pathname === link.to ? 700 : 500,
+                    letterSpacing: link.to === '/toolbox' ? '0.02em' : undefined,
+                    filter: location.pathname === link.to && link.to === '/toolbox' ? 'drop-shadow(0 0 6px #a259f7cc)' : undefined
+                  }}
+                >
+                  {link.label}
+                </RouterLink>
             ))}
             <ThemeToggleButton
               onClick={toggleTheme}
@@ -371,8 +353,7 @@ const Header = () => {
             {navLinks.map((link, index) => (
               <MobileNavLink 
                 key={index} 
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollToSection(link.href.substring(1)); }}
+                href={link.to}
               >
                 {link.label}
               </MobileNavLink>

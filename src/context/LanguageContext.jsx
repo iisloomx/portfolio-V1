@@ -31,6 +31,38 @@ export const LanguageProvider = ({ children }) => {
       // Projects Section
       projectsTitle: "My Projects",
       projectsDescription: "A collection of innovative projects showcasing my skills in web development, system administration, and software engineering.",
+      projects: [
+        {
+          title: "System and Log Monitoring with Docker and ELK",
+          description: "Built a system to automatically collect and monitor logs from different applications and servers. Used modern tools to make it easy to find issues quickly and keep everything running smoothly.",
+          icon: "docker"
+        },
+        {
+          title: "Monitoring and Metrics with VictoriaMetrics and Checkmk",
+          description: "Set up dashboards to track system health and performance in real time, helping to spot and fix issues before they become problems.",
+          icon: "metrics"
+        },
+        {
+          title: "Container Monitoring with cAdvisor and Grafana",
+          description: "Visualized how different software containers are performing, making it easy to understand resource usage and optimize performance.",
+          icon: "grafana"
+        },
+        {
+          title: "IPv4 Extended ACL Configuration (Packet Tracer)",
+          description: "Configured advanced security rules on a network to control which types of traffic are allowed, making the system more secure and protected from unwanted access.",
+          icon: "network"
+        },
+        {
+          title: "Access Control and SELinux Security Policies",
+          description: "Implemented different methods to manage permissions and security on Linux systems, ensuring only the right people and programs have access to sensitive data.",
+          icon: "security"
+        },
+        {
+          title: "Club Photo Nailloux Project",
+          description: "Developed and deployed a website for a local photography club, including event pages, secure user accounts, and automated server management for reliability.",
+          icon: "camera"
+        }
+      ],
 
       // Contact Section
       contactTitle: "Get In Touch",
@@ -75,8 +107,8 @@ export const LanguageProvider = ({ children }) => {
         {
           title: "Internship - R&D Trainee",
           subtitle: "Insimo",
-          description: "Worked in system administration (Linux), implemented a centralized logging system for Docker containers, Linux, and Windows logs; added SSH, port verification, and updates; worked with Grafana and InfluxDB for monitoring and visualization.",
-          date: "2024"
+          description: "Advanced Linux system administration, designed and deployed a centralized logging solution for Docker containers, Linux, and Windows systems. Implemented secure SSH access, automated port verification, and managed system updates. Developed monitoring and visualization dashboards with Grafana and InfluxDB. 3-month internship in Strasbourg.",
+          date: "2025 (3 months, Strasbourg)"
         },
         {
           title: "Pre-University Studies",
@@ -96,7 +128,7 @@ export const LanguageProvider = ({ children }) => {
       // Hero Section
       greeting: "BONJOUR, JE SUIS",
       title: "Étudiant en Informatique | Futur Administrateur Systèmes & Réseaux",
-      description: "Actuellement étudiant en informatique à l'IUT Paul Sabatier III, je me spécialise dans le Déploiement d'Applications Communicantes et Sécurisées (DACS). Passionné par l'administration des systèmes, la sécurité des réseaux et le développement logiciel, je possède une solide expérience en gestion des environnements Linux, administration de bases de données (PL/SQL, Oracle), et développement full-stack (Java, Python, PHP et technologies web).\n\nAu cours de mon parcours académique, j'ai configuré et géré des serveurs de stockage, développé des applications basées sur des bases de données évolutives et conçu des architectures logicielles en UML. J'aime relever des défis techniques complexes, optimiser les systèmes pour plus de performance et de sécurité, et apprendre continuellement de nouvelles technologies.\n\nEn dehors de l'informatique, je suis passionné par le powerlifting, la photographie et les voyages, toujours à la recherche de nouveaux défis, que ce soit dans le monde numérique ou ailleurs.",
+      description: "Actuellement étudiant en informatique à l'IUT Paul Sabatier III, je me spécialise dans le Déploiement d'Applications Communicantes et Sécurisées (DACS). Passionné par l'administration des systèmes, la sécurité des réseaux et le développement logiciel, je possède une solide expérience en gestion des environnements Linux, administration de bases de données (PL/SQL, Oracle), et développement full-stack (Java, Python, PHP, et technologies web).\n\nAu cours de mon parcours académique, j'ai configuré et géré des serveurs de stockage, développé des applications basées sur des bases de données évolutives et conçu des architectures logicielles en UML. J'aime relever des défis techniques complexes, optimiser les systèmes pour plus de performance et de sécurité, et apprendre continuellement de nouvelles technologies.\n\nEn dehors de l'informatique, je suis passionné par le powerlifting, la photographie et les voyages, toujours à la recherche de nouveaux défis, que ce soit dans le monde numérique ou ailleurs.",
       contactButton: "Me Contacter",
       resumeButton: "Télécharger CV",
 
@@ -108,11 +140,43 @@ export const LanguageProvider = ({ children }) => {
 
       // About Section
       aboutTitle: "À Propos de Moi",
-      aboutDescription: "J'ai toujours été fasciné par les coulisses des systèmes, qu'il s'agisse de serveurs, de réseaux ou de systèmes de sécurité. En tant qu'étudiant en informatique à l'IUT Paul Sabatier III, spécialisé dans le Déploiement d'Applications Communicantes et Sécurisées (DACS), je me concentre sur l'administration système, la sécurité réseau et le développement logiciel—mais ma véritable passion réside dans la cybersécurité.\n\nJ'aime explorer les vulnérabilités de sécurité, écrire des scripts d'automatisation et de test, et comprendre comment renforcer les défenses des systèmes. J'ai développé des scripts pour scanner et identifier les failles de sécurité, notamment la détection d'injections SQL, et j'adore le défi de rendre les systèmes plus sécurisés et résilients.\n\nAu-delà de la sécurité, j'ai de l'expérience en administration Linux, gestion de bases de données (PL/SQL, Oracle), et développement full-stack (Java, Python, PHP et technologies web). À travers mes projets académiques, j'ai déployé et géré des serveurs, construit des applications pilotées par des bases de données et conçu des architectures logicielles en UML.\n\nEn dehors de la tech, vous me trouverez en train de soulever des poids, de capturer des moments en photographie, ou de plonger dans des défis de cybersécurité. Je suis toujours prêt à discuter de sécurité, de hacking éthique ou des dernières innovations technologiques—alors connectons-nous !",
+      aboutDescription: "J'ai toujours été fasciné par les coulisses des systèmes, qu'il s'agisse de serveurs, de réseaux ou de systèmes de sécurité. En tant qu'étudiant en informatique à l'IUT Paul Sabatier III, spécialisé dans le Déploiement d'Applications Communicantes et Sécurisées (DACS), je me concentre sur l'administration système, la sécurité réseau et le développement logiciel—mais ma véritable passion réside dans la cybersécurité.\n\nJ'aime explorer les vulnérabilités de sécurité, écrire des scripts d'automatisation et de test, et comprendre comment renforcer les défenses des systèmes. J'ai développé des scripts pour scanner et identifier les failles de sécurité, notamment la détection d'injections SQL, et j'adore le défi de rendre les systèmes plus sécurisés et résilients.\n\nAu-delà de la sécurité, j'ai de l'expérience en administration Linux, gestion de bases de données (PL/SQL, Oracle), et développement full-stack (Java, Python, PHP, et technologies web). À travers mes projets académiques, j'ai déployé et géré des serveurs, construit des applications pilotées par des bases de données et conçu des architectures logicielles en UML.\n\nEn dehors de la tech, vous me trouverez en train de soulever des poids, de capturer des moments en photographie, ou de plonger dans des défis de cybersécurité. Je suis toujours prêt à discuter de sécurité, de hacking éthique ou des dernières innovations technologiques—alors connectons-nous !",
 
       // Projects Section
       projectsTitle: "Mes Projets",
       projectsDescription: "Une collection de projets innovants démontrant mes compétences en développement web, administration système et ingénierie logicielle.",
+      projects: [
+        {
+          title: "Supervision système et logs avec Docker et ELK",
+          description: "Création d’un système pour collecter et surveiller automatiquement les journaux d’applications et de serveurs. Utilisation d’outils modernes pour détecter rapidement les problèmes et assurer le bon fonctionnement de l’ensemble.",
+          icon: "docker"
+        },
+        {
+          title: "Supervision des métriques avec VictoriaMetrics et Checkmk",
+          description: "Mise en place de tableaux de bord pour suivre la santé et les performances des systèmes en temps réel, afin d’anticiper et de résoudre les problèmes rapidement.",
+          icon: "metrics"
+        },
+        {
+          title: "Supervision des conteneurs avec cAdvisor et Grafana",
+          description: "Visualisation des performances des conteneurs logiciels pour mieux comprendre l’utilisation des ressources et optimiser les performances.",
+          icon: "grafana"
+        },
+        {
+          title: "Configuration ACL IPv4 étendue (Packet Tracer)",
+          description: "Configuration de règles de sécurité avancées sur un réseau pour contrôler les types de trafic autorisés, renforçant ainsi la protection contre les accès indésirables.",
+          icon: "network"
+        },
+        {
+          title: "Contrôle d'accès et politiques de sécurité SELinux",
+          description: "Mise en œuvre de différentes méthodes pour gérer les autorisations et la sécurité sur les systèmes Linux, garantissant que seules les personnes et programmes autorisés accèdent aux données sensibles.",
+          icon: "security"
+        },
+        {
+          title: "Projet Club Photo Nailloux",
+          description: "Développement et déploiement d’un site web pour un club photo local, avec pages d’événements, comptes utilisateurs sécurisés et gestion automatisée du serveur pour plus de fiabilité.",
+          icon: "camera"
+        }
+      ],
 
       // Contact Section
       contactTitle: "Contactez-Moi",
@@ -157,8 +221,8 @@ export const LanguageProvider = ({ children }) => {
         {
           title: "Stage - Stagiaire R&D",
           subtitle: "Insimo",
-          description: "Administration système Linux, mise en place d'un système centralisé pour les logs des conteneurs Docker, logs Linux et Windows ; ajout d'accès SSH, vérification des ports et des mises à jour ; travail avec Grafana et InfluxDB pour la supervision et la visualisation.",
-          date: "2024"
+          description: "Administration avancée des systèmes Linux, conception et déploiement d'une solution centralisée de gestion des logs pour les conteneurs Docker, systèmes Linux et Windows. Mise en place de l'accès SSH sécurisé, vérification automatisée des ports et gestion des mises à jour. Développement de tableaux de bord de supervision et de visualisation avec Grafana et InfluxDB. Stage de 3 mois à Strasbourg.",
+          date: "2025 (3 mois, Strasbourg)"
         },
         {
           title: "Études Pré-Universitaires",

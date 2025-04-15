@@ -4,22 +4,52 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  --background: #242424;
+  --background-rgb: 36,36,36;
+  --card-bg: rgba(24, 26, 38, 0.91);
+  --primary: #a259f7;
+  --primary-rgb: 162,89,247;
+  --text: #f4f4fa;
+  --text-rgb: 244,244,250;
+  --hover: #6c63ff;
+  --glass-border: rgba(108,99,255,0.13);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dark-theme {
+  --background: #242424;
+  --background-rgb: 36,36,36;
+  --card-bg: rgba(24, 26, 38, 0.91);
+  --primary: #a259f7;
+  --primary-rgb: 162,89,247;
+  --text: #f4f4fa;
+  --text-rgb: 244,244,250;
+  --hover: #6c63ff;
+  --glass-border: rgba(108,99,255,0.13);
+}
+
+.light-theme {
+  --background: #f7f7fc;
+  --background-rgb: 247,247,252;
+  --card-bg: rgba(255,255,255,0.85);
+  --primary: #7c3aed;
+  --primary-rgb: 124,58,237;
+  --text: #22223b;
+  --text-rgb: 34,34,59;
+  --hover: #b983ff;
+  --glass-border: rgba(124,58,237,0.16);
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--hover);
 }
 
 body {
@@ -31,6 +61,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden; /* Prevent horizontal overflow */
+  background: var(--background);
+  color: var(--text);
 }
 
 /* Fix extra space issues at the bottom */
@@ -51,12 +83,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--card-bg);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary);
 }
 button:focus,
 button:focus-visible {
@@ -72,7 +104,7 @@ button:focus-visible {
 }
 
 .vertical-timeline::before {
-  background: #6C63FF !important;
+  background: var(--primary) !important;
   width: 4px !important;
   display: block !important;
 }
@@ -90,13 +122,20 @@ footer {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: #f7f7fc;
+    --background-rgb: 247,247,252;
+    --card-bg: rgba(255,255,255,0.85);
+    --primary: #7c3aed;
+    --primary-rgb: 124,58,237;
+    --text: #22223b;
+    --text-rgb: 34,34,59;
+    --hover: #b983ff;
+    --glass-border: rgba(124,58,237,0.16);
   }
   a:hover {
-    color: #747bff;
+    color: var(--hover);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--card-bg);
   }
 }

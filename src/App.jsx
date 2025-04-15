@@ -1,15 +1,17 @@
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider as CustomThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
+import Toolbox from './components/Toolbox/Toolbox';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const MobileControlsContainer = styled(motion.div)`
   position: fixed;
@@ -77,21 +79,37 @@ const MobileControls = () => {
   );
 };
 
+// ThemeSyncWrapper syncs theme from custom context to styled-components
+function ThemeSyncWrapper({ children }) {
+  const { theme } = useTheme();
+  return (
+    <StyledThemeProvider theme={{ mode: theme }}>
+      {children}
+    </StyledThemeProvider>
+  );
+}
+
 function App() {
   return (
     <LanguageProvider>
-      <ThemeProvider>
-        <GlobalStyles />
-        <Header />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
-        </main>
-        <Footer />
-        <MobileControls />
-      </ThemeProvider>
+      <CustomThemeProvider>
+        <ThemeSyncWrapper>
+          <GlobalStyles />
+          <BrowserRouter>
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Hero />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/toolbox" element={<Toolbox />} />
+              </Routes>
+            </main>
+            <Footer />
+            <MobileControls />
+          </BrowserRouter>
+        </ThemeSyncWrapper>
+      </CustomThemeProvider>
     </LanguageProvider>
   );
 }

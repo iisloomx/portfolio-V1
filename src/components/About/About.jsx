@@ -5,6 +5,7 @@ import { FaJava, FaPython, FaReact, FaNodeJs, FaDocker, FaLinux, FaGitAlt, FaDat
 import { SiTypescript, SiJavascript, SiMysql, SiMongodb, SiOracle, SiRedis, SiOwncloud } from 'react-icons/si';
 import { DiDjango } from 'react-icons/di';
 import { useLanguage } from '../../context/LanguageContext';
+import { useTheme } from 'styled-components';
 
 // 1) Import the library + default CSS
 import {
@@ -96,62 +97,21 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillCard = styled(motion.div)`
-  background: var(--background-secondary);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(var(--primary-rgb), 0.10), 0 2px 16px rgba(124,58,237,0.08);
+  transition: all 0.35s cubic-bezier(.4,2,.6,1);
   position: relative;
   overflow: hidden;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    transform: none;
-    
-    &:hover {
-      transform: none;
-    }
-  }
-
+  color: var(--text);
   &:hover {
-    @media (min-width: 769px) {
-      transform: 
-        translateZ(20px) 
-        rotateX(-5deg) 
-        rotateY(5deg);
-      border-color: rgba(var(--primary-rgb), 0.3);
-      box-shadow: 
-        0 10px 25px rgba(0,0,0,0.05),
-        0 5px 15px rgba(0,0,0,0.03);
-
-      &::before {
-        opacity: 1;
-      }
-
-      svg {
-        transform: scale(1.2) rotate(10deg);
-        color: var(--primary);
-      }
-    }
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle at center, 
-      rgba(var(--primary-rgb), 0.05) 0%, 
-      transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
+    box-shadow: 0 16px 60px 0 rgba(var(--primary-rgb),0.18), 0 4px 24px 0 rgba(124,58,237,0.10);
+    transform: translateY(-8px) scale(1.035);
+    border-color: var(--primary);
+    background: linear-gradient(120deg, var(--card-bg) 80%, var(--primary) 100%);
   }
 `;
 
@@ -173,36 +133,20 @@ const SkillIconWrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  
   svg {
-    font-size: 2.5rem;
-    color: var(--text-secondary);
-    transition: all 0.3s ease;
-
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
+    font-size: 2.9rem;
+    color: var(--primary);
+    background: none;
+    border-radius: 1.2rem;
+    padding: 0.5rem;
+    box-shadow: none;
+    transition: all 0.35s cubic-bezier(.4,2,.6,1);
   }
-  
   span {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    transition: color 0.3s ease;
-
-    @media (max-width: 768px) {
-      font-size: 0.7rem;
-    }
-  }
-
-  &:hover {
-    svg {
-      transform: translateY(-5px) scale(1.1);
-      color: var(--primary);
-    }
-
-    span {
-      color: var(--text);
-    }
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+    transition: color 0.3s;
   }
 `;
 
@@ -230,39 +174,58 @@ const TimelineSectionTitle = styled(motion.h2)`
 `;
 
 const TimelineCard = styled.div`
-  background: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 2rem;
-
+  background: ${({ theme }) => (theme.mode === 'dark' ? 'rgba(28,32,48,0.98)' : 'rgba(255,255,255,0.97)')};
+  border-radius: 2rem;
+  box-shadow: ${({ theme }) => (theme.mode === 'dark' ? '0 8px 32px 0 rgba(108,99,255,0.16), 0 1.5px 8px 0 rgba(63,81,181,0.11)' : '0 8px 32px 0 rgba(108,99,255,0.09), 0 1.5px 8px 0 rgba(63,81,181,0.04)')};
+  border: ${({ theme }) => (theme.mode === 'dark' ? '1.5px solid #23263a' : '1.5px solid #e0e7ff')};
+  padding: 2.3rem 2.8rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(circle, rgba(108,99,255,0.06) 0%, rgba(63,81,181,0.09) 100%);
+    z-index: 0;
+    filter: blur(18px);
+  }
   h3 {
-    color: var(--text);
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 0 0 0.75rem;
+    color: ${({ theme }) => (theme.mode === 'dark' ? '#fff' : '#222')};
+    font-weight: 800;
+    font-size: 1.35rem;
+    letter-spacing: 0.02em;
+    z-index: 2;
+    position: relative;
+    margin-bottom: 0.25rem;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
   }
-
   h4 {
-    color: var(--primary);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 1rem;
+    color: ${({ theme }) => (theme.mode === 'dark' ? '#b3baff' : '#3f51b5')};
+    font-weight: 700;
+    font-size: 1.07rem;
+    margin-bottom: 0.5rem;
+    z-index: 2;
+    position: relative;
   }
-
   p {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin: 0 0 1rem;
+    font-size: 1.09rem;
+    color: ${({ theme }) => (theme.mode === 'dark' ? '#e0e7ff' : '#222')};
+    margin-bottom: 8px;
+    z-index: 2;
+    position: relative;
   }
-
-  /* Put the date at the bottom, so it appears below everything else */
   .card-date {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: var(--text);
-    opacity: 0.8;
     font-style: italic;
+    color: #888;
+    font-size: 0.99rem;
+    z-index: 2;
+    position: relative;
   }
 `;
 
@@ -291,43 +254,16 @@ const CategoryDescription = styled.p`
    Data Arrays
 ============================= */
 
-const timelineItems = [
-  {
-    title: 'Computer Science Student',
-    subtitle: 'IUT Informatique, Paul Sabatier III',
-    description: `Specializing in Déploiement d'Applications 
-                  Communicantes et Sécurisées (DACS)`,
-    date: '2025 - Present',
-    icon: <FiCode />,
-    position: 'left'
-  },
-  {
-    title: 'Internship - R&D Trainee',
-    subtitle: 'Insimo',
-    description: `Worked in system administration (Linux), implemented a centralized logging system for Docker containers, Linux, and Windows logs; added SSH, port verification, and updates; worked with Grafana and InfluxDB for monitoring and visualization.`,
-    date: '2024',
-    icon: <FaLinux />,
-    position: 'right'
-  },
-  {
-    title: 'Pre-University Studies',
-    subtitle: 'University of Limoges',
-    description: `Gained a solid foundation in computer science principles, 
-                  learned French language (B2), etc.`,
-    date: '2021 - 2023',
-    icon: <FiBook />,
-    position: 'left'
-  },
-  {
-    title: 'General Studies',
-    subtitle: 'Azan Bin Qais High School',
-    description: `Gained a solid foundation in math, physics, 
-                  chemistry, and biology.`,
-    date: '2019 - 2021',
-    icon: <FiBook />,
-    position: 'right'
-  }
-];
+const timelineIconMap = {
+  'Computer Science Student': <FiCode />,
+  'Étudiant en Informatique': <FiCode />,
+  'Internship - R&D Trainee': <FaLinux />,
+  'Stage - Stagiaire R&D': <FaLinux />,
+  'Pre-University Studies': <FiBook />,
+  'Études Pré-Universitaires': <FiBook />,
+  'General Studies': <FiBook />,
+  'Études Générales': <FiBook />
+};
 
 /* ============================
    About Component
@@ -336,6 +272,40 @@ const timelineItems = [
 const About = () => {
   const { language, translations } = useLanguage();
   const t = translations[language];
+  const theme = useTheme();
+
+  const isDark = theme.mode === 'dark';
+  const cardBg = isDark ? 'rgba(28,32,48,0.98)' : 'rgba(255,255,255,0.97)';
+  const cardBorder = isDark ? '1.5px solid #23263a' : '1.5px solid #e0e7ff';
+  const cardShadow = isDark
+    ? '0 8px 32px 0 rgba(108,99,255,0.16), 0 1.5px 8px 0 rgba(63,81,181,0.11)'
+    : '0 8px 32px 0 rgba(108,99,255,0.09), 0 1.5px 8px 0 rgba(63,81,181,0.04)';
+  const titleColor = isDark ? '#fff' : '#222';
+  const subtitleColor = isDark ? '#b3baff' : '#3f51b5';
+  const iconBg = isDark ? '#6C63FF' : '#3f51b5';
+  const iconColor = '#fff';
+
+  const timelineIconStyle = {
+    background: iconBg,
+    color: iconColor,
+    boxShadow: '0 4px 24px rgba(108,99,255,0.18)',
+    border: '2.5px solid #fff',
+    outline: '4px solid #6C63FF',
+    outlineOffset: '2.5px',
+    transition: 'all 0.3s cubic-bezier(.4,2,.6,1)'
+  };
+
+  const timelineContentStyle = {
+    background: cardBg,
+    boxShadow: cardShadow,
+    borderRadius: '2rem',
+    border: cardBorder,
+    backdropFilter: 'blur(8px)'
+  };
+
+  const timelineContentArrowStyle = {
+    borderRight: `7px solid ${iconBg}`
+  };
 
   const skillCategories = [
     {
@@ -448,6 +418,12 @@ const About = () => {
     }
   ];
 
+  const timelineItems = t.timeline.map((item, idx) => ({
+    ...item,
+    icon: timelineIconMap[item.title] || <FiBook />,
+    position: idx % 2 === 0 ? 'left' : 'right'
+  }));
+
   return (
     <AboutSection id="about">
       <Container>
@@ -486,9 +462,7 @@ const About = () => {
                 textAlign: 'center', 
                 marginBottom: '2rem',
                 fontSize: '2.5rem',
-                background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                color: titleColor,
               }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -559,17 +533,9 @@ const About = () => {
               key={idx}
               position={item.position}
               icon={item.icon}
-              iconStyle={{
-                background: 'var(--primary)',
-                color: '#fff'
-              }}
-              contentStyle={{ 
-                background: 'transparent', 
-                boxShadow: 'none' 
-              }}
-              contentArrowStyle={{ 
-                borderRight: '7px solid transparent' 
-              }}
+              iconStyle={timelineIconStyle}
+              contentStyle={timelineContentStyle}
+              contentArrowStyle={timelineContentArrowStyle}
             >
               <TimelineCard>
                 <h3>{item.title}</h3>
