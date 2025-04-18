@@ -205,13 +205,7 @@ function Hero() {
             initial="hidden"
             animate="visible"
           >
-            <Button 
-              href="#contact" 
-              className="primary"
-              variants={itemVariants}
-            >
-              {t.contactButton} <FiArrowRight />
-            </Button>
+            {/* Contact button removed */}
             <Button 
               href="/CV.pdf" 
               download 
