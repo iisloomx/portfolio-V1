@@ -13,61 +13,37 @@ const HeaderContainer = styled(motion.header)`
   right: 0;
   z-index: 1000;
   background: ${props => props.scrolled ? 'var(--card-bg)' : 'transparent'};
-  backdrop-filter: ${props => props.scrolled ? 'blur(16px)' : 'none'};
-  -webkit-backdrop-filter: ${props => props.scrolled ? 'blur(16px)' : 'none'};
-  border-bottom: ${props => props.scrolled ? '1px solid var(--glass-border)' : 'none'};
-  box-shadow: ${props => props.scrolled ? '0 4px 30px rgba(0, 0, 0, 0.05)' : 'none'};
-  transition: all 0.4s ease;
+  backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
+  border-bottom: ${props => props.scrolled ? '1px solid var(--card-border)' : 'none'};
+  transition: all 0.3s ease;
   padding-bottom: 0;
 `;
 
 const Nav = styled.nav`
-  max-width: var(--max-width);
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const Logo = styled(RouterLink)`
-  font-size: 1.8rem;
-  font-weight: var(--font-weight-bold);
+const Logo = styled.a`
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--text);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   margin-bottom: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  &:hover {
+    color: var(--primary);
   }
 `;
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
   margin-left: auto;
   padding-right: 1rem;
@@ -77,35 +53,39 @@ const NavLinks = styled.div`
   }
 `;
 
-const NavLink = styled(RouterLink)`
+const NavLink = styled.a`
   color: var(--text);
   text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  font-size: 1rem;
-  padding: 0.5rem 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.25rem 0;
   transition: all 0.3s ease;
   position: relative;
+  margin-left: 1rem;
 
-  &::after {
+  &:after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--primary);
+    transition: width 0.3s ease;
   }
 
-  &:hover::after, &.active::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  &:hover:after {
+    width: 100%;
   }
 
   &.active {
     color: var(--primary);
+
+    &:after {
+      width: 100%;
+      background: var(--primary);
+    }
   }
 `;
 
@@ -113,22 +93,19 @@ const LanguageToggleButton = styled(motion.button)`
   background: transparent;
   border: none;
   color: var(--text);
-  font-size: 1rem;
-  font-weight: var(--font-weight-medium);
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  transition: color 0.3s ease;
+  margin-left: 1rem;
   
   &:hover {
     color: var(--primary);
-    background: rgba(var(--primary-rgb), 0.1);
   }
 `;
 
 const ThemeToggleButton = styled(motion.button)`
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--card-bg);
   color: var(--text);
@@ -136,21 +113,18 @@ const ThemeToggleButton = styled(motion.button)`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   padding: 0;
   margin-left: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
   &:hover {
-    transform: translateY(-3px);
     color: var(--primary);
     border-color: var(--primary);
-    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.25);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
   }
 
   .icon-container {
@@ -172,16 +146,16 @@ const ThemeToggleButton = styled(motion.button)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: all 0.3s ease;
   }
 
   .sun-icon {
-    transform: ${props => props.theme === 'dark' ? 'translate(-50%, -50%) rotate(0)' : 'translate(-50%, -150%) rotate(-180deg)'};
+    transform: ${props => props.theme === 'dark' ? 'translate(-50%, -50%)' : 'translate(-50%, -150%)'};
     opacity: ${props => props.theme === 'dark' ? 1 : 0};
   }
 
   .moon-icon {
-    transform: ${props => props.theme === 'light' ? 'translate(-50%, -50%) rotate(0)' : 'translate(-50%, 50%) rotate(180deg)'};
+    transform: ${props => props.theme === 'light' ? 'translate(-50%, -50%)' : 'translate(-50%, 50%)'};
     opacity: ${props => props.theme === 'light' ? 1 : 0};
   }
 `;
@@ -291,9 +265,9 @@ const Header = () => {
     { label: language === 'en' ? translations.en.navAbout : translations.fr.navAbout, to: '/about', isRoute: true },
     { label: language === 'en' ? translations.en.navProjects : translations.fr.navProjects, to: '/projects', isRoute: true },
     { label: (
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          <FiTool style={{ marginRight: '0.32em' }} />
-          {language === 'en' ? 'Toolbox' : 'Boîte à Outils'}
+        <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.02em', display: 'flex', alignItems: 'center' }}>
+          <FiTool style={{ color: 'var(--primary)', marginRight: '0.32em', filter: 'drop-shadow(0 0 6px #a259f7cc)' }} />
+          My Toolbox
         </span>
       ), to: '/toolbox', isRoute: true }
   ];
@@ -324,14 +298,14 @@ const Header = () => {
       >
         <Nav>
           <Logo 
-            to="#home" 
+            href="#home" 
           >
             Salim
           </Logo>
           
           <NavLinks>
             {navLinks.map((link, index) => (
-                <NavLink
+                <RouterLink
                   key={index}
                   to={link.to}
                   style={{
@@ -344,7 +318,7 @@ const Header = () => {
                   }}
                 >
                   {link.label}
-                </NavLink>
+                </RouterLink>
             ))}
             <ThemeToggleButton
               onClick={toggleTheme}
@@ -379,7 +353,7 @@ const Header = () => {
             {navLinks.map((link, index) => (
               <MobileNavLink 
                 key={index} 
-                to={link.to}
+                href={link.to}
               >
                 {link.label}
               </MobileNavLink>

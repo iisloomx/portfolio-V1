@@ -236,7 +236,7 @@ function Hero() {
         loaded={particlesLoaded}
         options={{
           fullScreen: { enable: false },
-          fpsLimit: 60,
+          fpsLimit: 120,
           particles: {
             number: { 
               value: 80, 

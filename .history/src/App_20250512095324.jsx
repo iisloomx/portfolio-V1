@@ -3,13 +3,12 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/HeroFixed2';
+import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Footer from './components/Footer/Footer';
 import Toolbox from './components/Toolbox/Toolbox';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import AnimatedBackground from './components/Background/AnimatedBackground';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { FiMoon, FiSun } from 'react-icons/fi';
@@ -98,7 +97,6 @@ function App() {
         <ThemeSyncWrapper>
           <GlobalStyles />
           <BrowserRouter>
-            <AnimatedBackground />
             <Header />
             <main>
               <Routes>

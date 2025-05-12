@@ -291,9 +291,9 @@ const Header = () => {
     { label: language === 'en' ? translations.en.navAbout : translations.fr.navAbout, to: '/about', isRoute: true },
     { label: language === 'en' ? translations.en.navProjects : translations.fr.navProjects, to: '/projects', isRoute: true },
     { label: (
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          <FiTool style={{ marginRight: '0.32em' }} />
-          {language === 'en' ? 'Toolbox' : 'Boîte à Outils'}
+        <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.02em', display: 'flex', alignItems: 'center' }}>
+          <FiTool style={{ color: 'var(--primary)', marginRight: '0.32em', filter: 'drop-shadow(0 0 6px #a259f7cc)' }} />
+          My Toolbox
         </span>
       ), to: '/toolbox', isRoute: true }
   ];

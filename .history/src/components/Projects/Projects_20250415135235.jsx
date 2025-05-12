@@ -41,89 +41,65 @@ const ProjectGrid = styled.div`
   padding: 2.5rem 0;
 `;
 
-const ProjectIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
-  display: flex;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* Light mode: no glow, Dark mode: soft glow */
-  html.dark-theme & {
-    filter: drop-shadow(0 0 12px rgba(var(--primary-rgb), 0.4));
-  }
-`;
-
-const ProjectTitle = styled.h3`
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
-  color: var(--text);
-  font-weight: var(--font-weight-bold);
-  transition: color 0.3s ease;
-`;
-
 const ProjectCard = styled(motion.div)`
   background: var(--card-bg);
-  border-radius: var(--border-radius-lg);
+  border-radius: 1.6rem;
   overflow: hidden;
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 8px 32px rgba(var(--primary-rgb), 0.10), 0 2px 16px rgba(124,58,237,0.08);
   border: 2px solid var(--glass-border);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: pointer;
+  transition: box-shadow 0.3s, border 0.3s, transform 0.25s, background 0.25s;
+  cursor: default;
   position: relative;
   height: 100%;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   color: var(--text);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent 0%, rgba(var(--primary-rgb), 0.05) 100%);
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
   &:hover {
-    box-shadow: var(--box-shadow-colored);
+    box-shadow: 0 16px 48px 0 rgba(var(--primary-rgb),0.19), 0 8px 32px 0 rgba(124,58,237,0.13);
     border: 2px solid var(--primary);
-    transform: translateY(-12px);
-    
-    &::before {
-      opacity: 1;
-    }
-    
-    ${ProjectIcon} {
-      transform: scale(1.15);
-      filter: drop-shadow(0 0 15px rgba(var(--primary-rgb), 0.5));
-    }
-    
-    ${ProjectTitle} {
-      color: var(--primary);
-    }
+    transform: translateY(-6px) scale(1.025);
+    background: linear-gradient(120deg, var(--card-bg) 80%, var(--primary) 100%);
   }
 `;
 
 const ProjectContent = styled.div`
-  padding: 2rem;
+  padding: 1.5rem;
   height: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
-  z-index: 1;
+`;
+
+const ProjectIcon = styled.div`
+  font-size: 2.7rem;
+  margin-bottom: 1.4rem;
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  filter: none;
+  transition: color 0.3s, filter 0.3s;
+  
+  /* Light mode: no glow, Dark mode: soft glow */
+  html.dark-theme & {
+    filter: drop-shadow(0 0 12px #a259f7cc);
+    color: #a259f7;
+  }
+  html.light-theme & {
+    filter: none;
+    color: #7c3aed;
+  }
+`;
+
+const ProjectTitle = styled.h3`
+  font-size: 1.25rem;
+  margin-bottom: 0.9rem;
+  color: var(--text);
+  font-weight: 700;
 `;
 
 const ProjectDescription = styled.p`
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 0;
+  color: var(--text);
+  margin-bottom: 0.7rem;
   flex-grow: 1;
 `;
 
@@ -245,18 +221,17 @@ const Projects = () => {
               key={idx}
               options={{
                 max: 15,
-                scale: 1,
-                speed: 450,
-                glare: true,
-                "max-glare": 0.1,
+                scale: 1.05,
+                speed: 1000,
               }}
             >
               <ProjectCard
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.175, 0.885, 0.32, 1.275] }}
-                viewport={{ once: true, margin: "-100px" }}
-                onClick={() => openModal(project)}
+                transition={{ duration: 0.5, delay: idx * 0.13 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                style={{ cursor: 'default' }}
               >
                 <ProjectContent>
                   <ProjectIcon>{iconMap[project.icon] || <FaDocker />}</ProjectIcon>

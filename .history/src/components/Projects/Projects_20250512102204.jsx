@@ -55,14 +55,6 @@ const ProjectIcon = styled.div`
   }
 `;
 
-const ProjectTitle = styled.h3`
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
-  color: var(--text);
-  font-weight: var(--font-weight-bold);
-  transition: color 0.3s ease;
-`;
-
 const ProjectCard = styled(motion.div)`
   background: var(--card-bg);
   border-radius: var(--border-radius-lg);
@@ -117,6 +109,14 @@ const ProjectContent = styled.div`
   flex-direction: column;
   position: relative;
   z-index: 1;
+`;
+
+const ProjectTitle = styled.h3`
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-weight: var(--font-weight-bold);
+  transition: color 0.3s ease;
 `;
 
 const ProjectDescription = styled.p`

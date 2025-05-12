@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiGlobe, FiMoon, FiSun, FiSun as FiLight, FiMoon as FiDark, FiTool } from 'react-icons/fi';
+import { FiMenu, FiX, FiGlobe, FiMoon, FiSun, FiSun as FiLight, FiMoon as FiDark, FiTool, FiClock } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -295,7 +295,13 @@ const Header = () => {
           <FiTool style={{ marginRight: '0.32em' }} />
           {language === 'en' ? 'Toolbox' : 'Boîte à Outils'}
         </span>
-      ), to: '/toolbox', isRoute: true }
+      ), to: '/toolbox', isRoute: true },
+    { label: (
+        <span style={{ display: 'flex', alignItems: 'center' }}>
+          <FiClock style={{ marginRight: '0.32em' }} />
+          {language === 'en' ? 'Journey' : 'Parcours'}
+        </span>
+      ), to: '/timeline', isRoute: true }
   ];
 
   useEffect(() => {

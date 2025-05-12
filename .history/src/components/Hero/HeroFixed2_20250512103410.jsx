@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiDownload } from 'react-icons/fi';
+import { FiDownload } from 'react-icons/fi';
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { useCallback } from "react";
@@ -181,15 +181,6 @@ const Button = styled(motion.a)`
   }
 `;
 
-const ParticlesContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-`;
-
 function Hero() {
   const { language, translations } = useLanguage();
   const { theme } = useTheme();
@@ -239,7 +230,7 @@ function Hero() {
           fpsLimit: 60,
           particles: {
             number: { 
-              value: 80, 
+              value: 60, 
               density: { enable: true, value_area: 800 } 
             },
             color: { value: "var(--primary)" },
@@ -274,12 +265,12 @@ function Hero() {
               enable: true, 
               distance: 150, 
               color: "var(--primary)", 
-              opacity: 0.4, 
+              opacity: 0.3, 
               width: 1
             },
             move: { 
               enable: true, 
-              speed: 1, 
+              speed: 0.8, 
               direction: "none", 
               random: false, 
               straight: false, 

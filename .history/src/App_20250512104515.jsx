@@ -8,6 +8,7 @@ import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Footer from './components/Footer/Footer';
 import Toolbox from './components/Toolbox/Toolbox';
+import Timeline from './components/Timeline/Timeline';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import AnimatedBackground from './components/Background/AnimatedBackground';
 import { motion } from 'framer-motion';
@@ -106,6 +107,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/toolbox" element={<Toolbox />} />
+                <Route path="/timeline" element={<Timeline />} />
               </Routes>
             </main>
             <Footer />

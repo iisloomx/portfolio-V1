@@ -41,28 +41,6 @@ const ProjectGrid = styled.div`
   padding: 2.5rem 0;
 `;
 
-const ProjectIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
-  display: flex;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* Light mode: no glow, Dark mode: soft glow */
-  html.dark-theme & {
-    filter: drop-shadow(0 0 12px rgba(var(--primary-rgb), 0.4));
-  }
-`;
-
-const ProjectTitle = styled.h3`
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
-  color: var(--text);
-  font-weight: var(--font-weight-bold);
-  transition: color 0.3s ease;
-`;
-
 const ProjectCard = styled(motion.div)`
   background: var(--card-bg);
   border-radius: var(--border-radius-lg);
@@ -117,6 +95,28 @@ const ProjectContent = styled.div`
   flex-direction: column;
   position: relative;
   z-index: 1;
+`;
+
+const ProjectIcon = styled.div`
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Light mode: no glow, Dark mode: soft glow */
+  html.dark-theme & {
+    filter: drop-shadow(0 0 12px rgba(var(--primary-rgb), 0.4));
+  }
+`;
+
+const ProjectTitle = styled.h3`
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-weight: var(--font-weight-bold);
+  transition: color 0.3s ease;
 `;
 
 const ProjectDescription = styled.p`

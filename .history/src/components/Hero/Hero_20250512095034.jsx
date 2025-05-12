@@ -12,19 +12,8 @@ const HeroSection = styled.section`
   display: flex;
   align-items: center;
   position: relative;
-  padding: 6rem 2rem 4rem;
+  padding: 3rem 2rem 2rem;
   overflow: hidden;
-  background: ${props => props.theme === 'dark' ? `
-    radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.1) 0%, transparent 40%)
-  ` : `
-    radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.07) 0%, transparent 30%),
-    radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.05) 0%, transparent 30%)
-  `};
-
-  @media (max-width: 768px) {
-    padding: 5rem 1.5rem 3rem;
-  }
 `;
 
 const Container = styled.div`
@@ -42,29 +31,16 @@ const Greeting = styled(motion.span)`
   display: inline-block;
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--accent);
-  margin-bottom: 1.2rem;
-  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  position: relative;
-  padding-left: 3rem;
-  
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 2.5rem;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transform: translateY(-50%);
-  }
 `;
 
 const Name = styled(motion.h1)`
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  margin-bottom: 1.2rem;
-  font-weight: var(--font-weight-extrabold);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  margin-bottom: 1rem;
+  font-weight: 800;
   line-height: 1.1;
   color: var(--text);
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
@@ -72,73 +48,58 @@ const Name = styled(motion.h1)`
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
-  letter-spacing: -0.02em;
-  filter: drop-shadow(0 2px 10px rgba(var(--primary-rgb), 0.3));
 `;
 
 const Title = styled(motion.h2)`
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   margin-bottom: 2rem;
   color: var(--text);
-  font-weight: var(--font-weight-semibold);
-  max-width: 800px;
+  font-weight: 600;
 `;
 
 const Description = styled(motion.p)`
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  margin-bottom: 3rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 2.5rem;
   color: var(--text-secondary);
-  max-width: 750px;
-  line-height: 1.7;
-  position: relative;
-  
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -1.5rem;
-    left: 0;
-    width: 5rem;
-    height: 4px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--primary), transparent);
-  }
+  max-width: 600px;
+  line-height: 1.6;
 `;
 
 const ButtonContainer = styled(motion.div)`
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
-  margin-top: 2.5rem;
 `;
 
 const Button = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  border-radius: 3rem;
-  font-weight: var(--font-weight-semibold);
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   text-decoration: none;
   z-index: 1;
 
   svg {
-    transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transition: transform 0.3s ease;
   }
 
   &.primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
     color: white;
-    box-shadow: 0 10px 25px -5px rgba(var(--primary-rgb), 0.4);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px -5px rgba(var(--primary-rgb), 0.6);
+      transform: translateY(-2px);
+      background: var(--accent);
+      box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.4);
 
       svg {
-        transform: translateX(5px) scale(1.2);
+        transform: translateX(4px);
       }
     }
   }
@@ -147,35 +108,14 @@ const Button = styled(motion.a)`
     background: transparent;
     color: var(--text);
     border: 2px solid var(--primary);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      z-index: -1;
-      transition: width 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-    }
 
     &:hover {
+      background: var(--primary);
       color: white;
-      transform: translateY(-5px);
-      border-color: transparent;
-      box-shadow: 0 15px 30px -5px rgba(var(--primary-rgb), 0.4);
-      
-      &::before {
-        width: 100%;
-      }
+      transform: translateY(-2px);
 
       svg {
-        transform: translateY(-3px) scale(1.2);
-        color: white;
+        transform: translateY(2px);
       }
     }
   }
@@ -222,21 +162,20 @@ function Hero() {
       opacity: 1,
       transition: { 
         type: "spring", 
-        stiffness: 70,
-        damping: 15 
+        stiffness: 100 
       }
     }
   };
 
   return (
-    <HeroSection id="home" theme={theme}>
+    <HeroSection id="home">
       <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
         options={{
           fullScreen: { enable: false },
-          fpsLimit: 60,
+          fpsLimit: 120,
           particles: {
             number: { 
               value: 80, 
@@ -335,20 +274,19 @@ function Hero() {
             {t.title}
           </Title>
           <Description variants={itemVariants}>
-            {t.description.split('\n\n')[0]}
+            {t.description}
           </Description>
           <ButtonContainer 
-            variants={containerVariants}
+            variants={itemVariants}
             initial="hidden"
             animate="visible"
           >
+            {/* Contact button removed */}
             <Button 
               href="/CV.pdf" 
               download 
               className="secondary"
               variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
             >
               {t.resumeButton} <FiDownload />
             </Button>

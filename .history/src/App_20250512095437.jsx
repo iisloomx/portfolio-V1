@@ -3,7 +3,7 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/HeroFixed2';
+import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Footer from './components/Footer/Footer';
